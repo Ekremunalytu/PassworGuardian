@@ -1,6 +1,8 @@
 #include <iostream>
 #include <cmath>
 #include <string>
+#include <chrono>
+#include <thread>
 
 
 int main() {
@@ -13,7 +15,7 @@ int main() {
     int lowercase_flag = 0 , uppercase_flag = 0 , number_flag = 0 , special_character_flag = 0;
     
 
-    std::cout << "Welcome to password Password Guardian" << std::endl;
+    std::cout << "Welcome to Password Guardian" << std::endl;
     std::cout << "Please enter your password to see how safe it is" << std::endl;
 
     std::getline(std::cin , password);
@@ -46,7 +48,7 @@ int main() {
 
         if  (number_flag && lowercase_flag && uppercase_flag && special_character_flag ){
             
-            std::cout << "well done. Your password is safe" << std::endl;
+            std::cout << "Well done. Your password is safe" << std::endl;
             exit_flag = 0;
 
         } else{
@@ -56,6 +58,9 @@ int main() {
             std::getline( std::cin , password);
         }
     }
-    return 0;
+
+    std::this_thread::sleep_for(std::chrono::seconds(5));
     
+    return 0;
+
 }
