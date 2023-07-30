@@ -3,6 +3,8 @@
 #include <string>
 #include <chrono>
 #include <thread>
+#include <fstream>
+
 
 
 int main() {
@@ -13,6 +15,14 @@ int main() {
 
     int length_flag = 0;
     int lowercase_flag = 0 , uppercase_flag = 0 , number_flag = 0 , special_character_flag = 0;
+
+    std::ifstream file("passwords.txt");
+
+    if (!file){
+        std::cerr << "File could not opened!" << std::endl;
+    }
+
+    
     
 
     std::cout << "Welcome to Password Guardian" << std::endl;
@@ -21,6 +31,26 @@ int main() {
     std::getline(std::cin , password);
 
     while (exit_flag){
+
+        uppercase_flag = 0;
+        lowercase_flag = 0;
+        special_character_flag = 0;
+        number_flag = 0;
+        
+        std::string line;
+        file.clear();
+        file.seekg(0);
+
+        while (std::getline(file ,line )){
+            if ( line == password ){
+                std::cout << "Common password alert!" << std::endl;
+                std::cout << "Please try again"  << std::endl;
+                file.clear();
+                file.seekg(0);
+                std::getline(std::cin , password);
+            }
+
+            }
         
         int password_length = password.length();
 
@@ -46,6 +76,9 @@ int main() {
             }
         }
 
+        
+        
+
         if  (number_flag && lowercase_flag && uppercase_flag && special_character_flag ){
             
             std::cout << "Well done. Your password is safe" << std::endl;
@@ -57,7 +90,11 @@ int main() {
             std::cout << "Try again.. " << std::endl;
             std::getline( std::cin , password);
         }
+
+        
+            
     }
+    file.close();
 
     std::this_thread::sleep_for(std::chrono::seconds(5));
     
