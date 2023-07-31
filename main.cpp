@@ -27,7 +27,11 @@ int main() {
 
     std::cout << "Welcome to Password Guardian" << std::endl;
     std::cout << "Please enter your password to see how safe it is" << std::endl;
-
+    std::cout << "Usage" << std::endl;
+    std::cout << "1-Minimum password length should be greater than 7" << std::endl;
+    std::cout << "2-Users must use at least 1 upper case and lower case letter in their passwords" << std::endl;
+    std::cout << "3-Users must use at least 1 number and special character in their passwords" << std::endl;
+    std::cout << "4-Users should not use common passwords. Our program detects common passwords and blocks users to obtain common passwords" << std::endl;
     std::getline(std::cin , password);
 
     while (exit_flag){
@@ -44,6 +48,7 @@ int main() {
         while (std::getline(file ,line )){
             if ( line == password ){
                 std::cout << "Common password alert!" << std::endl;
+                std::cout << "Please do not use common passwords.These passwords create serious security flaws!!" << std::endl;
                 std::cout << "Please try again"  << std::endl;
                 file.clear();
                 file.seekg(0);
@@ -84,6 +89,23 @@ int main() {
         } else{
            
             std::cout << "Your password is too weak!!" << std::endl;
+            
+            if( number_flag == 0 ){
+                std::cout << "Please use numbers in your password!!" << std::endl;
+            }
+
+            if ( lowercase_flag ==  0 ){
+                std::cout << "Please use lower case letters in  your password!!" << std::endl;
+            }
+
+            if ( uppercase_flag == 0 ){
+                std::cout << "Please use upper case letter in  your password!!" << std::endl;
+            }
+
+            if ( special_character_flag == 0 ){
+                std::cout << "Please use special characters in your  password!!" << std::endl;
+            } 
+
             std::cout << "Try again.. " << std::endl;
             std::getline( std::cin , password);
         }
