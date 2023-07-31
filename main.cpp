@@ -76,9 +76,6 @@ int main() {
             }
         }
 
-        
-        
-
         if  (number_flag && lowercase_flag && uppercase_flag && special_character_flag ){
             
             std::cout << "Well done. Your password is safe" << std::endl;
@@ -91,9 +88,8 @@ int main() {
             std::getline( std::cin , password);
         }
 
-        
-            
     }
+
     file.close();
 
     std::this_thread::sleep_for(std::chrono::seconds(5));
