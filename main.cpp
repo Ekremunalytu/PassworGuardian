@@ -4,8 +4,17 @@
 #include <chrono>
 #include <thread>
 #include <fstream>
+#include <iomanip>
+
+
+const double basic_brute_speed    = 1000;
+const double avarage_brute_speed  = 100000;
+const double advanced_brute_speed = 100000000;
+
 
 void password_checker(std::string password , int *p_exit_pointer);
+
+void brute_force_time(const std::string& password);
 
 int main() {
 
@@ -35,6 +44,7 @@ int main() {
     std::cout << "2-Users must use at least 1 upper case and lower case letter in their passwords" << std::endl;
     std::cout << "3-Users must use at least 1 number and special character in their passwords" << std::endl;
     std::cout << "4-Users should not use common passwords. Our program detects common passwords and blocks users to obtain common passwords" << std::endl;
+    std::cout << "5-Attackers can brute force your passwords if they have them. To prevent this , this program supports time complexity calculations." << std::endl;
     std::getline(std::cin , password);
 
     while (exit_flag){
@@ -54,18 +64,20 @@ int main() {
                 std::getline(std::cin , password);
             }
 
-            }
+        }
 
         password_checker(password , p_exit_pointer);
-        
+
         std::getline( std::cin , password);
+
+        
         
     }
 
 
         file.close();
 
-        std::this_thread::sleep_for(std::chrono::seconds(5));
+        
     
     return 0;
 
@@ -107,6 +119,7 @@ void password_checker(std::string password  ,int  *p_exit_pointer ){
         if  (number_flag && lowercase_flag && uppercase_flag && special_character_flag ){
             
             std::cout << "Well done. Your password is safe" << std::endl;
+            brute_force_time(password);
             *p_exit_pointer = 0;
 
         } else{
@@ -133,10 +146,32 @@ void password_checker(std::string password  ,int  *p_exit_pointer ){
             
         }
 
-    }
+}
 
 
+void brute_force_time(const std::string& password){
 
+    int password_length = password.length();
+    int character_set_size = 94;
+
+    double total_calculations = std::pow(character_set_size , password_length);
+
+    double basic_brute_force_time    = ( total_calculations / basic_brute_speed    ) / 31536000;
+    double average_brute_force_time  = ( total_calculations / avarage_brute_speed  ) / 31536000;
+    double advanced_brute_force_time = ( total_calculations / advanced_brute_speed ) / 31536000;
+
+    std::cout << std::fixed << std::setprecision(0);
+
+    std::cout << "It takes " << basic_brute_force_time << " years to crack your password for basic brute force techniques" << std::endl;
+    std::cout << "It takes " << average_brute_force_time << " years to crack your password for average brute force techniques" << std::endl;
+    std::cout << "It takes " << advanced_brute_force_time << " years to crack your password for advanced brute force techniques" << std::endl;
+
+    std::this_thread::sleep_for(std::chrono::seconds(5));
+    exit(0);
+
+    
+    
+}
 
 
 
