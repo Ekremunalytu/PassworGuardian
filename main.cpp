@@ -52,15 +52,13 @@ int main() {
     std::cout << "5-Attackers can brute force your passwords if they have them. To prevent this , this program supports time complexity calculations." << std::endl;
     std::cout << "You can also use generated password from our program" << std::endl;
     std::cout << "Enter 1 to generate password or enter 2 to enter your personal password" << std::endl;
-    std::cin  >> password_selector;
+    
     while (( !(std::cin>>password_selector)) ||  (!(password_selector == 1 || password_selector == 2))){
         std::cout << "Invalid input. Please enter 1 or 0" << std::endl;
         std::cin.clear();
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     }
     
-    
-
     switch ( password_selector){
     case 1:{
         while (password_generation_flag){
@@ -85,12 +83,9 @@ int main() {
         return 1;
     }
     
-    
 
     while (exit_flag){
-
-        
-        
+  
         std::string line;
         file.clear();
         file.seekg(0);
@@ -130,7 +125,7 @@ void password_checker(std::string password  ,int  *p_exit_pointer ){
         if ( password_length < 8 ) {
             std::cout << "Password is too short!!! try again" << std::endl;
             std::getline(std::cin , password);
-        }else if (password_length > 32 ) {
+        }else if (password_length > 64 ) {
             std::cout << "Password is too long!!! try again" << std::endl;
             std::getline(std::cin , password);
         }
