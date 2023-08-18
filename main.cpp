@@ -53,6 +53,13 @@ int main() {
     std::cout << "You can also use generated password from our program" << std::endl;
     std::cout << "Enter 1 to generate password or enter 2 to enter your personal password" << std::endl;
     std::cin  >> password_selector;
+    while (( !(std::cin>>password_selector)) ||  (!(password_selector == 1 || password_selector == 2))){
+        std::cout << "Invalid input. Please enter 1 or 0" << std::endl;
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    }
+    
+    
 
     switch ( password_selector){
     case 1:{
