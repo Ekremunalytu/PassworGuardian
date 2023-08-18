@@ -70,6 +70,8 @@ int main() {
         break;
     }
     case 2:
+        std::cout << "Enter your password" << std::endl;
+        std::cin  >> password;
         break;
     default:
         std::cout << "Invalid choice" << std::endl;
